@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -40,4 +42,8 @@ public class Block {
     @OneToMany(mappedBy = "block", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private List<Content> contents = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "card_id")
+    private Card card;
 }

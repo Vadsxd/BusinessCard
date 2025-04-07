@@ -12,4 +12,9 @@ public class CreateCardRequest {
     @Size(min = 5, message = "Название должно содержать минимум 5 символов")
     @NotBlank(message = "Название не может быть пустыми")
     private String name;
+
+    @Schema(description = "Описание резюме", example = "Опыт работы 100 лет (релевантный)")
+    @Size(min = 10, message = "Описание должно быть минимум 10 символов")
+    @NotBlank(message = "Описание не может отсутствовать")
+    private String description;
 }

@@ -3,15 +3,16 @@ package ru.domain.businesscard.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
-import ru.domain.businesscard.domain.Card;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Builder
 @Data
-@Schema(description = "ДТО резюме пользователя")
+@Schema(description = "ДТО конкретного резюме")
 public class CardDto {
-    @Schema(description = "Резюме пользователя")
-    private List<Card> cards;
+    @Schema(description = "Заголовок в резюме")
+    private String name;
+
+    @Schema(description = "Список ДТО блоков в резюме")
+    private List<BlockDto> blockDtos;
 }
