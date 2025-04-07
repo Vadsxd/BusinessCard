@@ -2,7 +2,9 @@ package ru.domain.businesscard.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ru.domain.businesscard.domain.Card;
 import ru.domain.businesscard.domain.User;
 import ru.domain.businesscard.dto.BlockDto;
@@ -25,6 +27,10 @@ public class CardService {
         this.cardRepo = cardRepo;
     }
 
+    public void save(Card card) {
+        cardRepo.save(card);
+    }
+
     @Transactional
     public Card create(CreateCardRequest request, User user) {
         var card = Card.builder()
@@ -32,13 +38,14 @@ public class CardService {
                 .name(request.getName())
                 .description(request.getDescription())
                 .build();
-        cardRepo.save(card);
+        save(card);
 
         return card;
     }
 
     public CardDto getCard(User user, Long cardId) {
-        Card userCard = cardRepo.findCardByUserAndId(user, cardId);
+        Card userCard = cardRepo.findCardByUserAndId(user, cardId).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Данного резюме не существует"));
 
         return CardDto.builder()
                 .name(userCard.getName())

@@ -18,17 +18,17 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public User save(User user) {
-        return userRepo.save(user);
+    public void save(User user) {
+        userRepo.save(user);
     }
 
     @Transactional
-    public User create(User user) {
+    public void create(User user) {
         if (userRepo.existsByLogin(user.getLogin())) {
             throw new RuntimeException("Пользователь с таким логином уже существует");
         }
 
-        return save(user);
+        save(user);
     }
 
     public User getByLogin(String login) {

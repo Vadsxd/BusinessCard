@@ -6,10 +6,11 @@ import ru.domain.businesscard.domain.Card;
 import ru.domain.businesscard.domain.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CardRepo extends JpaRepository<Card, Long> {
     List<Card> findAllByUser(User user);
-
-    Card findCardByUserAndId(User user, Long id);
+    Optional<Card> findCardByUser(User user);
+    Optional<Card> findCardByUserAndId(User user, Long id);
 }
