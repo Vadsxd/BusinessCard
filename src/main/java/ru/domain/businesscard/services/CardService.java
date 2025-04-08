@@ -15,6 +15,7 @@ import ru.domain.businesscard.dto.StatisticsDto;
 import ru.domain.businesscard.repos.CardRepo;
 import ru.domain.businesscard.requests.CreateCardRequest;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,5 +79,16 @@ public class CardService {
                         )
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public CardDto sortBlocks(User user, Long cardId) {
+        CardDto userCardDto = getCard(user, cardId);
+
+        List<BlockDto> sortedBlockDtos = userCardDto.getBlockDtos().stream()
+                .sorted(Comparator.comparing(BlockDto::getName))
+                .collect(Collectors.toList());
+        userCardDto.setBlockDtos(sortedBlockDtos);
+
+        return userCardDto;
     }
 }

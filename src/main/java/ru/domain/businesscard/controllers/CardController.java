@@ -43,6 +43,7 @@ public class CardController {
     @PostMapping("/create")
     public ResponseEntity<Card> createCard(@RequestBody @Valid CreateCardRequest request) {
         User currentUser = userService.getCurrentUser();
+
         return ResponseEntity.ok(cardService.create(request, currentUser));
     }
 
@@ -66,5 +67,16 @@ public class CardController {
         User currentUser = userService.getCurrentUser();
 
         return ResponseEntity.ok(cardService.getCard(currentUser, id));
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "403", description = "Ошибка авторизации")
+    })
+    @Operation(summary = "Отсортировать блоки в резюме по названию")
+    @GetMapping("/{id}/sort")
+    public ResponseEntity<CardDto> sortBlocks(@PathVariable Long id) {
+        User currentUser = userService.getCurrentUser();
+
+        return ResponseEntity.ok(cardService.sortBlocks(currentUser, id));
     }
 }
