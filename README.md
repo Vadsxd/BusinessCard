@@ -15,4 +15,5 @@ SpringBoot 3.4.4, PostgreSQL 15, Docker 27.5.1, Java 21, Gradle 8.13, Swagger 3.
 * http://localhost:8080/swagger-ui/index.html#/
 
 ## БД:
+Инициализировать можно с помощью `init.sql` в `query console`
 ![image](https://github.com/user-attachments/assets/b04d3567-0af0-4040-8e3f-b9d30cfe947f)
